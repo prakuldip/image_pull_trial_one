@@ -14,6 +14,9 @@ stages {
                     docker.withRegistry("https://${registryURI}",registryCredential){
                     customImage.pull()
                     }
+                    customImage.inside(){
+                        sh 'make test'
+                    }
                 }
             }
         }
