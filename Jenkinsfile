@@ -4,15 +4,15 @@ pipeline {
         registryURI = "registry.hub.docker.com/"
         registry = "prakuldip/jenkinsfile_kul_app_trialtwo"
         registryCredential = "dockerhub_cred"
+        imageTag = "b822a9dfd11973f4040263f06e0b00d6be0d7088"
     }
 stages {
-        stage('docker image build,push to remote and delete locally') {
+        stage('image pull') {
             steps{
                 script {
-                    docker.withRegistry("https://${env.registryURI}",registryCredential){
-                    docker.build("${env.registryURI}${env.registry}:$GIT_COMMIT").push()
+                    docker.withRegistry("https://${registryURI}",registryCredential){
+                    docker.image("${registryURI}${registry}:${imageTag}").pull()
                     }
-                    sh "docker image rm '${registryURI}${registry}:$GIT_COMMIT'"
                 }
             }
         }
