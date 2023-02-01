@@ -10,8 +10,9 @@ stages {
         stage('image pull') {
             steps{
                 script {
+                    def customImage = docker.image("${registryURI}${registry}:${imageTag}")
                     docker.withRegistry("https://${registryURI}",registryCredential){
-                    docker.image("${registryURI}${registry}:${imageTag}").pull()
+                    customImage.pull()
                     }
                 }
             }
