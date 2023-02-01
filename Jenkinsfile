@@ -14,7 +14,7 @@ stages {
                     docker.withRegistry("https://${registryURI}",registryCredential){
                     customImage.pull()
                     }
-                    customImage.tag("${registryURI}${registry}:${imageTag}","anniamge:v1")
+                    customImage.tag("${registryURI}anniamge:v1")
                 }
             }
         }
